@@ -6,38 +6,17 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using System.Globalization;
 using static System.Console;
-using CsvHelper.Configuration.Attributes;
-using System.Diagnostics.Metrics;
-using System.Collections;
 
 namespace Lab_1
 {
-    public class VideoGames : IComparable<VideoGames>
-    {
-        public string Name { get; set; }
-        public string Platform { get; set; }
-        public string Year { get; set; }
-        public string Genre { get; set; }
-        public string Publisher { get; set; }
-        public decimal NASales { get; set; }
-        public decimal EUSales { get; set; }
-        public decimal JPSales { get; set; }
-        public decimal OtherSales { get; set; }
-        public decimal GlobalSales { get; set; }
-
-        public int CompareTo(VideoGames other)
-        {
-            return Name.CompareTo(other.Name);
-        }
-    }
-
     internal class Program
     {
-       
-        public static void PublisherData(string input, List<VideoGames> data, decimal IncomingCounter) {
+
+        public static void PublisherData(string input, List<VideoGames> data, decimal IncomingCounter)
+        {
             decimal counter = 0;
             decimal counter2 = IncomingCounter;
-            
+
             WriteLine("Please enter a gaming developer.\n");
             input = ReadLine();
 
@@ -52,7 +31,7 @@ namespace Lab_1
 
             decimal Percentage = counter / counter2;
 
-            WriteLine("\nOut of " + counter2 + " games, " + counter + " are " + input +" games, which is " + Percentage.ToString("P", CultureInfo.InvariantCulture) + " of all games.");
+            WriteLine("\nOut of " + counter2 + " games, " + counter + " are " + input + " games, which is " + Percentage.ToString("P", CultureInfo.InvariantCulture) + " of all games.");
             ReadLine();
         }
 
@@ -60,7 +39,7 @@ namespace Lab_1
         {
             decimal counter = 0;
             decimal counter2 = IncomingCounter;
-            
+
             WriteLine("Please insert a game genre.\n");
             input = ReadLine();
 
@@ -75,13 +54,14 @@ namespace Lab_1
 
             decimal Percentage = counter / counter2;
 
-            WriteLine("\nOut of " + counter2 + " games, " + counter + " are " + input +" games, which is " + Percentage.ToString("P", CultureInfo.InvariantCulture) + " of all games.");
-
+            WriteLine("\nOut of " + counter2 + " games, " + counter + " are " + input + " games, which is " + Percentage.ToString("P", CultureInfo.InvariantCulture) + " of all games.");
+            ReadLine();
         }
 
         private static void Main(string[] args)
         {
-            string FilePath = "C:\\Users\\Owner\\source\\repos\\Lab 1\\Lab 1\\videogames.csv";
+            //file location will differ, so will need to be changed to accomodate that
+            string FilePath = "C:\\Users\\robertsej1\\source\\repos\\Lab 1\\Lab 1\\videogames.csv";
 
             var reader = new StreamReader(FilePath);
 
@@ -95,7 +75,7 @@ namespace Lab_1
             List<VideoGames> data = new List<VideoGames>();
 
 
-            using var csv = new CsvReader(reader, csvConfig);
+            var csv = new CsvReader(reader, csvConfig);
             {
                 // Skips the first row, since it won't convert right
                 reader.ReadLine();
@@ -107,7 +87,7 @@ namespace Lab_1
                 }
 
             }
-            
+
             //variables for the PublisherData and GenreData classes
             string UserInput = "";
             decimal counter = 0;
